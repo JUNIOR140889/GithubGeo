@@ -9,10 +9,15 @@ import Foundation
 import APIKit
 
 public class UnlinkAccount: NSObject {
-    let worker: Worker
+    let worker: WorkerProtocol
 
-    public init(apiProvider: AnyAPIProvider<UnlinkRequest> = AnyAPIProvider<UnlinkRequest>(APIProvider<UnlinkRequest>())){
-        worker = Worker(apiProvider: apiProvider)
+    init(worker: WorkerProtocol) {
+        self.worker = worker
+        super.init()
+    }
+
+    public convenience init(apiProvider: AnyAPIProvider<UnlinkRequest> = AnyAPIProvider<UnlinkRequest>(APIProvider<UnlinkRequest>())){
+        self.init(worker: Worker(apiProvider: apiProvider))
     }
 
     public func execute(onCompletion: ((Result<UnlinkResult, Error>) -> Void)?)  {
