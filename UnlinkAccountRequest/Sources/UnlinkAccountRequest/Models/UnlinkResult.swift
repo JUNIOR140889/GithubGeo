@@ -1,17 +1,12 @@
-//
-//  UnlinkResult.swift
-//  UnlinkAccountRequest
-//
-//  Created by Mariano Uriel Delgado on 30/09/2022.
-//
-
 import Foundation
 
-@objc public final class UnlinkResult: NSObject  {
-    @objc public let title: String
-    @objc public let message: String
-    @objc public let actionTitle: String
-    @objc public let action: URL
+#if canImport(ObjectiveC)
+@objcMembers
+public final class UnlinkResult: NSObject {
+    public let title: String
+    public let message: String
+    public let actionTitle: String
+    public let action: URL
 
     init(metadata: UnlinkMetadata) {
         title = metadata.title
@@ -20,17 +15,44 @@ import Foundation
 
         var url: URL?
         switch metadata.action.type {
-            case .url:
-                url = try? metadata.action.metadata.link?.asURL()
-            case .dial:
-                guard let phone = metadata.action.metadata.phone else { fatalError("String cannot be nil") }
-                url = try? "tel://\(phone)".asURL()
-            case .invalid:
-                break
+        case .url:
+            url = try? metadata.action.metadata.link?.asURL()
+        case .dial:
+            guard let phone = metadata.action.metadata.phone else { fatalError("String cannot be nil") }
+            url = try? "tel://\(phone)".asURL()
+        case .invalid:
+            break
         }
 
-        guard let url = url else { fatalError("Action should be setted at this point") }
-        action = url
+        guard let finalURL = url else { fatalError("Action should be setted at this point") }
+        action = finalURL
     }
-
 }
+#else
+public final class UnlinkResult {
+    public let title: String
+    public let message: String
+    public let actionTitle: String
+    public let action: URL
+
+    init(metadata: UnlinkMetadata) {
+        title = metadata.title
+        message = metadata.message
+        actionTitle = metadata.action.name
+
+        var url: URL?
+        switch metadata.action.type {
+        case .url:
+            url = try? metadata.action.metadata.link?.asURL()
+        case .dial:
+            guard let phone = metadata.action.metadata.phone else { fatalError("String cannot be nil") }
+            url = try? "tel://\(phone)".asURL()
+        case .invalid:
+            break
+        }
+
+        guard let finalURL = url else { fatalError("Action should be setted at this point") }
+        action = finalURL
+    }
+}
+#endif
