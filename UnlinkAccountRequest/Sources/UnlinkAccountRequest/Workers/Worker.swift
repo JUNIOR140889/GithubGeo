@@ -8,15 +8,17 @@
 import APIKit
 import UIKit
 
-final class Worker {
+protocol WorkerProtocol {
+    func unlink(onCompletion: ((Result<UnlinkMetadata, Error>) -> Void)?)
+}
+
+final class Worker: WorkerProtocol {
     let serviceProvider: AnyAPIProvider<UnlinkRequest>
 
     init(apiProvider: AnyAPIProvider<UnlinkRequest> = AnyAPIProvider<UnlinkRequest>(APIProvider<UnlinkRequest>())){
         serviceProvider = apiProvider
     }
-}
 
-extension Worker {
     func unlink(onCompletion: ((Result<UnlinkMetadata, Error>) -> Void)?) {
         serviceProvider.perform(.unlink) {
             do {
