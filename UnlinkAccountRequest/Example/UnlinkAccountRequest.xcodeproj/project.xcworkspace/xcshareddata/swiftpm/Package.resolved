@@ -1,0 +1,33 @@
+{
+  "originHash" : "3714eb102cd1c11b0425887c70c36468d557483aae442954cd744884019efcd7",
+  "pins" : [
+    {
+      "identity" : "cryptoswift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/krzyzanowskim/CryptoSwift",
+      "state" : {
+        "revision" : "729e01bc9b9dab466ac85f21fb9ee2bc1c61b258",
+        "version" : "1.8.4"
+      }
+    },
+    {
+      "identity" : "kingfisher",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/onevcat/Kingfisher",
+      "state" : {
+        "revision" : "d06df9adf50ed8cde5786d935836a5f445f780ba",
+        "version" : "6.3.1"
+      }
+    },
+    {
+      "identity" : "trustkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/datatheorem/TrustKit",
+      "state" : {
+        "revision" : "5718ba8720b4dafc5360aebfbc9762e2d5f2615e",
+        "version" : "3.0.3"
+      }
+    }
+  ],
+  "version" : 3
+}
