@@ -6,7 +6,7 @@
 //
 
 import APIKit
-import UIKit
+import Foundation
 
 final class Worker {
     let serviceProvider: AnyAPIProvider<UnlinkRequest>
