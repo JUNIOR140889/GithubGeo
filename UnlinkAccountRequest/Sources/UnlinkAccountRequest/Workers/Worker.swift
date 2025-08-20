@@ -6,7 +6,7 @@
 //
 
 import APIKit
-import UIKit
+import Foundation
 
 protocol WorkerProtocol {
     func unlink(onCompletion: ((Result<UnlinkMetadata, Error>) -> Void)?)
